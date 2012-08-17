@@ -7,7 +7,6 @@ use Test::Mojo;
 use FindBin ();
 use File::Copy qw( copy );
 use File::Spec;
-use PDFMerge;
 use PDF::API2;
 
 mkdir( File::Spec->catdir(File::HomeDir->my_home, 'PDF') );
@@ -16,8 +15,33 @@ copy(
   File::Spec->catfile(File::HomeDir->my_home, 'PDF', 'test.pdf'),
 ) or die "Copy failed: $!";
 
+eval {
+  package TestPDFMerge;
 
-my $t = Test::Mojo->new('PDFMerge');
+  use Mojo::Base qw( Mojolicious );
+
+  sub startup
+  {
+    my($self) = @_;
+    $self->plugin('PDFMerge');
+    $self->routes->get('/')
+         ->name('index')
+         ->to('controller#index');
+    return;
+  }
+
+  package TestPDFMerge::Controller;
+
+  use Mojo::Base 'Mojolicious::Controller';
+
+  sub index
+  {
+    shift->redirect_to('pdf_list');
+  }
+};
+die $@ if $@;
+
+my $t = Test::Mojo->new('TestPDFMerge');
 
 $t->get_ok('/')
   ->status_is(302)
