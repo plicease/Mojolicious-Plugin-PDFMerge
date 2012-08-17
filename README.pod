@@ -1,42 +1,10 @@
-package Mojolicious::Plugin::PDFMerge;
+=head1 NAME
 
-use Mojo::Base 'Mojolicious::Plugin';
-use Mojolicious::Plugin::PDFMerge::Data;
-use File::Basename qw( dirname );
-use Path::Class qw( dir );
+Mojolicious::Plugin::PDFMerge - Web interface for merging PDF documents.
 
-# ABSTRACT: Web interface for merging PDF documents.
-# VERSION
+=head1 VERSION
 
-sub register
-{
-  my($self, $app, $conf) = @_;
-
-  $app->plugin('TtRenderer');
-  $app->plugin('RenderFile');
-
-  my $plugin_home = dir(dirname(__FILE__), 'PDFMerge')->absolute;
-  push @{ $app->static->paths }, $plugin_home->subdir('public')->stringify;
-  push @{ $app->renderer->paths }, $plugin_home->subdir('templates')->stringify;
-
-  my $r = $app->routes;
-
-  $r->get('/pdf')->name('pdf_list')->to('controller#pdf_list', namespace => __PACKAGE__);
-
-  $r->get('/pdf/#filename.pdf')->name('pdf_download')->to('controller#pdf_download', namespace => __PACKAGE__);
-
-  $r->post('/pdf/merge')->name('pdf_merge_form')->to('controller#pdf_merge_form', namespace => __PACKAGE__);
-
-  $r->get('/pdf/merge/*pdf_list')->name('pdf_merge')->to('controller#pdf_merge', namespace => __PACKAGE__);
-
-  $app->helper(pdf => sub {
-    state $data;
-    $data //= Mojolicious::Plugin::PDFMerge::Data->new;
-  });
-}
-
-1;
-
+version 0.1
 
 =head1 SYNOPSIS
 
@@ -85,5 +53,14 @@ L<Mojolicious::Plugin::PDFMerge::Data>,
 L<Mojolicious::Plugin::PDFMerge::Controller>,
 L<Mojolicious>
 
-=cut
+=head1 AUTHOR
+
+Graham Ollis <plicease@wdlabs.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Graham Ollis.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
