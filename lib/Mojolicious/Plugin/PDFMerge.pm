@@ -12,7 +12,6 @@ sub register
 {
   my($self, $app, $conf) = @_;
 
-  $app->plugin('TtRenderer');
   $app->plugin('RenderFile');
 
   my $plugin_home = dir(dirname(__FILE__), 'PDFMerge')->absolute;

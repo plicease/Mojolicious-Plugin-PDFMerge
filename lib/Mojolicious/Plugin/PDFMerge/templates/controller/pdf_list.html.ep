@@ -1,0 +1,45 @@
+<% layout 'bootstrap', 
+     project => 'PDFMerge', 
+     description => 'Web interface for merging PDF documents', 
+     author => 'Graham Ollis', 
+     title => pdf()->pdf_directory, 
+     links => pdf()->links, 
+     footer => pdf()->footer,
+     favicon => '/favicon.ico';
+%>
+
+<br/>
+
+<form method="post" action="<%= url_for('pdf_merge_form') %>">
+  <input type="submit" value="merge" class="btn" />
+% foreach my $pdf (@$pdfs) {
+    <input type="hidden" name="pdf_<%= $pdf->{id} %>_name" value="<%= $pdf->{name} %>" />
+% }
+
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th>include</th>
+        <th>name</th>
+        <th>pages</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+% foreach my $pdf (@$pdfs) {
+
+        <tr>
+          <td><input type="checkbox" checked=checked name="pdf_<%= $pdf->{id} %>" id="pdf_checkbox_<%= $pdf->{id} %>" /></td>
+          <td><a href="<%= url_for('pdf_download', filename => $pdf->{name} ) %>"><%= $pdf->{name} %></a></td>
+          <td><%= $pdf->{page_count} %></td>
+        </tr>
+
+% }
+
+    </tbody>
+
+  </table>
+
+</form>
