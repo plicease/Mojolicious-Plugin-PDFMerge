@@ -2,6 +2,7 @@ package Mojolicious::Plugin::PDFMerge;
 
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojolicious::Plugin::PDFMerge::Data;
+use Mojolicious::Plugin::RenderFile;
 use File::Basename qw( dirname );
 use Path::Class qw( dir );
 
