@@ -48,7 +48,7 @@ sub register
 
 2. Start the app
 
- % ./myapp.pl
+ % ./myapp.pl daemon
 
 3. then point your browser to
 
