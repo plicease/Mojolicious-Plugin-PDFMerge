@@ -1,32 +1,24 @@
-=head1 NAME
+# Mojolicious::Plugin::PDFMerge
 
-Mojolicious::Plugin::PDFMerge - Web interface for merging PDF documents.
+Web interface for merging PDF documents.
 
-=head1 VERSION
+# SYNOPSIS
 
-version 0.1
+1\. Create a Mojolicious app with this plugin
 
-=head1 SYNOPSIS
+    use Mojolicious::Lite
+    plugin 'PDFMerge';
+    app->start;
 
-1. Create a Mojolicious app with this plugin
+2\. Start the app
 
- use Mojolicious::Lite
- plugin 'PDFMerge';
- app->start;
+    % ./myapp.pl daemon
 
-2. Start the app
+3\. then point your browser to
 
- % ./myapp.pl daemon
+- http://localhost:3000/pdf
 
-3. then point your browser to
-
-=over 4
-
-=item * http://localhost:3000/pdf
-
-=back
-
-=head1 DESCRIPTION
+# DESCRIPTION
 
 This plugin provides a web interface for merging multiple
 PDF documents so they can be sent to a printer for physical
@@ -47,20 +39,19 @@ Office.
 The application is implemeted with  Mojolicious, plus a few other
 modules available on CPAN.
 
-=head1 SEE ALSO
+# SEE ALSO
 
-L<Mojolicious::Plugin::PDFMerge::Data>,
-L<Mojolicious::Plugin::PDFMerge::Controller>,
-L<Mojolicious>
+[Mojolicious::Plugin::PDFMerge::Data](https://metacpan.org/pod/Mojolicious::Plugin::PDFMerge::Data),
+[Mojolicious::Plugin::PDFMerge::Controller](https://metacpan.org/pod/Mojolicious::Plugin::PDFMerge::Controller),
+[Mojolicious](https://metacpan.org/pod/Mojolicious)
 
-=head1 AUTHOR
+# AUTHOR
 
 Graham Ollis <plicease@cpan.org>
 
-=head1 COPYRIGHT AND LICENSE
+# COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2012 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
